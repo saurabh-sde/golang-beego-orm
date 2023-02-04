@@ -58,7 +58,10 @@ func main() {
 	if err != nil {
 		return
 	}
-	fmt.Println("user: ", users)
+	// print all users
+	for id, user := range users {
+		fmt.Printf("User %v : %+v \n", id+1, user)
+	}
 
 	// delete
 	// uncomment the delete to remove user inserted into table
