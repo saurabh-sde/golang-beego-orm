@@ -43,7 +43,7 @@ func main() {
 		return
 	}
 	// update
-	u, err := model.GetUserByName(user.Name)
+	u, err := model.GetUserByName(*user.Name)
 	if err != nil {
 		return
 	}
@@ -58,11 +58,12 @@ func main() {
 	if err != nil {
 		return
 	}
-	fmt.Println("row: , user: ", len(users), users)
+	fmt.Println("user: ", users)
 
 	// delete
-	err = model.RemoveUser(&user)
-	if err != nil {
-		return
-	}
+	// uncomment the delete to remove user inserted into table
+	// err = model.RemoveUser(&user)
+	// if err != nil {
+	// 	return
+	// }
 }

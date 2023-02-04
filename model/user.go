@@ -17,22 +17,23 @@ type User struct {
 }
 
 func init() {
+	fmt.Println("initializing register User model")
 	orm.RegisterModel(new(User))
 }
 
 func AddUser(user *User) (id int64, err error) {
 	o := orm.NewOrm()
-	id, err = o.Insert(&user)
+	id, err = o.Insert(user)
 	if err != nil {
 		fmt.Println("Err in insert: ", err)
 	}
 	return
 }
 
-func GetAllUsers() ([]*User, error) {
+func GetAllUsers() ([]User, error) {
 	o := orm.NewOrm()
-	var users []*User
-	_, err := o.QueryTable("user").All(&users)
+	var users []User
+	_, err := o.QueryTable(new(User)).All(&users)
 	if err != nil {
 		fmt.Println("Err in GetAllUsers: ", err)
 		return nil, err
@@ -40,20 +41,21 @@ func GetAllUsers() ([]*User, error) {
 	return users, err
 }
 
-func GetUserByName(name *string) (*User, error) {
+func GetUserByName(name string) (*User, error) {
+	fmt.Println(name)
 	o := orm.NewOrm()
-	var user *User
-	err := o.QueryTable("user").Filter("name", name).One(&user)
+	var user User
+	err := o.QueryTable(new(User)).Filter("name", name).One(&user)
 	if err != nil {
 		fmt.Println("Err in GetUserByName: ", err)
 		return nil, err
 	}
-	return user, err
+	return &user, err
 }
 
 func UpdateUser(user *User) (err error) {
 	o := orm.NewOrm()
-	_, err = o.Update(&user)
+	_, err = o.Update(user)
 	if err != nil {
 		fmt.Println("Err in UpdateUser: ", err)
 	}
@@ -62,7 +64,7 @@ func UpdateUser(user *User) (err error) {
 
 func RemoveUser(user *User) (err error) {
 	o := orm.NewOrm()
-	_, err = o.Delete(&user)
+	_, err = o.Delete(user)
 	if err != nil {
 		fmt.Println("Err in RemoveUser")
 	}
