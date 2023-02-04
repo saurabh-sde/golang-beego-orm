@@ -6,7 +6,7 @@ Features:
 - easy for usage, simple CRUD operation
 - auto join with relation table
 - Raw SQL query / mapper without orm model
-- Secure
+- Secure and multiple driver connection (like MySQL, postgres, etc)
 
 # Beego ORM implementation in Go lang
 
@@ -27,6 +27,19 @@ For more implementation details check this out:
 
 <br>
 
-# Detailed Documentations for usage
+# Detailed Documentations for Database usage
 > https://github.com/beego/beedoc/tree/master/en-US/mvc/model
+
+<br>
+
+---
+
+# Project Structure 
+1. main.go - main program file
+2. Model - database models and queries
+3. db.sql - Database setup
+4. .env - all environment variables
+5. go.mod - dependencies
+
+> NOTE - Project is not completely on MVC framework. Idea is to only integrate Beego ORM and perform CRUD operations. You can create your project with handle and controller, then use Postman for API interactions
 
